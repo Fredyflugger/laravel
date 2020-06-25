@@ -30,3 +30,20 @@ Route::get('/', function () use ($text, $title) {
 </html>
 php;
 });
+
+Route::get('/greetings', function () {
+    $name = request()->has('name') ? request()->get('name') : null;
+    if (is_null($name)) {
+        return "Specify name";
+    }
+    
+    return "Hello, ". $name;
+});
+
+Route::get('/about', function () {
+    echo "<h1>I will fill it later... Probably...</h1>";
+});
+
+Route::get('/news', function () {
+    echo "<h1>Here be news. Somewhere.</h1>";
+});
