@@ -15,35 +15,15 @@ $title = 'Моя первая страница';
 |
 */
 
-Route::get('/', function () use ($text, $title) {
-    return <<<php
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$title</title>
-</head>
-<body>
-    <h1>$text</h1>
-    lorem ipsum dolor ....
-</body>
-</html>
-php;
+Route::group(['prefix' => 'news'], function () {
+    Route::get('/', 'NewsController@index')->name('news');
+    Route::get('/create', 'NewsController@create')->name('news.create');
+    Route::get('/{id}/edit', 'NewsController@edit')->where('id', '\d+')->name('news.edit');
+    Route::get('/{cat}', 'NewsController@singleCat')->where('cat', '\w+')->name('singleCat');
+    Route::get('/{cat}/{news}', 'NewsController@singleNews')->where(['cat' => '\w+', 'news'  => '\w+'])->name('singleNews');
+
 });
 
-Route::get('/greetings', function () {
-    $name = request()->has('name') ? request()->get('name') : null;
-    if (is_null($name)) {
-        return "Specify name";
-    }
-    
-    return "Hello, ". $name;
-});
+Route::get('/', 'UserController@index')->name('greetings');
+Route::get('/auth', 'UserController@auth')->name('auth');
 
-Route::get('/about', function () {
-    echo "<h1>I will fill it later... Probably...</h1>";
-});
-
-Route::get('/news', function () {
-    echo "<h1>Here be news. Somewhere.</h1>";
-});
