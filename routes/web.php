@@ -19,11 +19,15 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'NewsController@index')->name('news');
     Route::get('/create', 'NewsController@create')->name('news.create');
     Route::get('/{id}/edit', 'NewsController@edit')->where('id', '\d+')->name('news.edit');
-    Route::get('/{cat}', 'NewsController@singleCat')->where('cat', '\w+')->name('singleCat');
     Route::get('/{cat}/{news}', 'NewsController@singleNews')->where(['cat' => '\w+', 'news'  => '\w+'])->name('singleNews');
 
 });
 
-Route::get('/', 'UserController@index')->name('greetings');
-Route::get('/auth', 'UserController@auth')->name('auth');
+Route::get('/', 'NewsController@index')->name('greetings');
+Route::get('/{cat}', 'CategoryController@singleCat')->where('cat', '\w+')->name('singleCat');
+Route::get('/user/auth', 'UserController@auth')->name('auth');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

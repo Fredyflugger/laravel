@@ -1,3 +1,4 @@
+<div class="col-md-8 blog-main">
 <form action="#">
     <label for="login">Login:</label><br>
     <input type="text" name="login" placeholder="login@mail"><br>
@@ -10,3 +11,4 @@
     <br><br>
     <input type="submit" value="Submit">
 </form>
+</div>

@@ -1,19 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Traits\newsDataTrait;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $title = 'Greetings';
-        return view('index', ['title' => $title]);
-    }
+    use newsDataTrait;
     public function auth()
     {
         $title = 'Authentication';
-        return view('user.user', ['title' => $title]);
+        return view('user.user', ['title' => $title, 'newsCategory' => $this->newsCategory]);
     }
 }

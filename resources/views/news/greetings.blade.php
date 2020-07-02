@@ -8,8 +8,12 @@
     @include('navBarMenu')
 @stop
 
+@section('banner')
+    @include('banner')
+@stop
+
 @section('body')
-    @include('authBody')
+    @include('IndexBody')
 @stop
 
 @section('sideBar')

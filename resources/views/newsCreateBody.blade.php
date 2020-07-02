@@ -1,3 +1,4 @@
+<div class="col-md-8 blog-main">
 <form action="#">
     <label for="headline">Headline:</label><br>
     <input type="text" name="headline" placeholder="Your News Headline"><br>
@@ -7,3 +8,4 @@
     <input type="text" name="shortDesc" placeholder="Short description of your news"><br><br>
     <input type="submit" value="Submit">
 </form>
+</div>
