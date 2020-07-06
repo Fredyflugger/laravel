@@ -23,9 +23,16 @@ Route::group(['prefix' => 'news'], function () {
 
 });
 
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/auth', 'UserController@auth')->name('auth');
+    Route::get('/feedback', 'UserController@feedback')->name('feedback');
+    Route::post('/feedback/submit', 'UserController@feedbackSubmit')->name('feedbackSubmit');
+    Route::get('/unload', 'UserController@unloadData')->name('unload');
+    Route::post('/unload/submit', 'UserController@unloadSubmit')->name('unloadSubmit');
+});
+
 Route::get('/', 'NewsController@index')->name('greetings');
 Route::get('/{cat}', 'CategoryController@singleCat')->where('cat', '\w+')->name('singleCat');
-Route::get('/user/auth', 'UserController@auth')->name('auth');
 
 
 Auth::routes();

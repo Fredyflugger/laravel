@@ -1,0 +1,9 @@
+.feedbackForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.feedbackInput {
+    margin-bottom: 15px;
+}
