@@ -1,13 +1,13 @@
 @extends('...layouts.layout')
 
 @section('header')
-    @include('header')
+    @include('generalBlocks.header')
 @stop
 
 @section('body')
-    @include('singleNewsBody')
+    @include('pageBlocks.singleNewsBody')
 @stop
 
 @section('footer')
-    @include('footer')
+    @include('generalBlocks.footer')
 @stop

@@ -11,17 +11,17 @@ class UserController extends Controller
     public function auth()
     {
         $title = 'Authentication';
-        return view('user.user', ['title' => $title, 'newsCategory' => $this->newsCategory]);
+        return view('user.user', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
     }
     public function feedback()
     {
         $title = 'Feedback';
-        return view('user.feedback', ['title' => $title, 'newsCategory' => $this->newsCategory]);
+        return view('user.feedback', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
     }
     public function unloadData()
     {
         $title = 'Unloading Request Form';
-        return view('user.unloadData', ['title' => $title, 'newsCategory' => $this->newsCategory]);
+        return view('user.unloadData', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
     }
     public function unloadSubmit(Request $request)
     {

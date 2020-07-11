@@ -11,20 +11,20 @@ class NewsController extends Controller
     public function index()
     {
         $title = 'My News';
-        return view('news.greetings', ['title' => $title], ['newsCategory' => $this->newsCategory]);
+        return view('news.greetings', ['title' => $title], ['newsCategory' => $this->newsCategory()]);
     }
     public function create()
     {
         $title = 'News Creation';
-        return view('news.create', ['title' => $title, 'newsCategory' => $this->newsCategory]);
+        return view('news.create', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
     }
     public function edit(int $id)
     {
         return view('news.edit', ['id' => $id]);
     }
-    public function singleNews($cat, $news)
+    public function singleNews($news)
     {
-        $title = $news;
-        return view('news.singleNews', ['cat' => $cat, 'news' => $news, 'title' => $title], ['newsData' => $this->newsData()]);
+        $title = 'Новостя';
+        return view('news.singleNews', ['title' => $title, 'id' => $news], ['newsData' => $this->newsData()]);
     }
 }

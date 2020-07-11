@@ -18,8 +18,8 @@ $title = 'Моя первая страница';
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'NewsController@index')->name('news');
     Route::get('/create', 'NewsController@create')->name('news.create');
-    Route::get('/{id}/edit', 'NewsController@edit')->where('id', '\d+')->name('news.edit');
-    Route::get('/{cat}/{news}', 'NewsController@singleNews')->where(['cat' => '\w+', 'news'  => '\w+'])->name('singleNews');
+    // Route::get('/{id}/edit', 'NewsController@edit')->where('id', '\d+')->name('news.edit');
+    Route::get('/{news}', 'NewsController@singleNews')->where('news', '\w+')->name('singleNews');
 
 });
 
@@ -33,7 +33,6 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::get('/', 'NewsController@index')->name('greetings');
 Route::get('/{cat}', 'CategoryController@singleCat')->where('cat', '\w+')->name('singleCat');
-
 
 Auth::routes();
 

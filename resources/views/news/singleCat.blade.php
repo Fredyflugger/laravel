@@ -1,25 +1,25 @@
 @extends('...layouts.layout')
 
 @section('header')
-    @include('header')
+    @include('generalBlocks.header')
 @stop
 
 @section('navBarMenu')
-    @include('navBarMenu')
+    @include('generalBlocks.navBarMenu')
 @stop
 
 @section('banner')
-    @include('banner')
+    @include('generalBlocks.banner')
 @stop
 
 @section('body')
-    @include('singleCatBody')
+    @include('pageBlocks.singleCatBody')
 @stop
 
 @section('sideBar')
-    @include('sideBar')
+    @include('generalBlocks.sideBar')
 @stop
 
 @section('footer')
-    @include('footer')
+    @include('generalBlocks.footer')
 @stop

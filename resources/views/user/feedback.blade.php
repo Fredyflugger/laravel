@@ -1,17 +1,17 @@
 @extends('...layouts.layout')
 
 @section('header')
-    @include('header')
+    @include('generalBlocks.header')
 @stop
 
 @section('navBarMenu')
-    @include('navBarMenu')
+    @include('generalBlocks.navBarMenu')
 @stop
 
 @section('body')
-    @include('feedbackBody')
+    @include('pageBlocks.feedbackBody')
 @stop
 
 @section('footer')
-    @include('footer')
+    @include('generalBlocks.footer')
 @stop

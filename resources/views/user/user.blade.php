@@ -1,21 +1,21 @@
 @extends('...layouts.layout')
 
 @section('header')
-    @include('header')
+    @include('generalBlocks.header')
 @stop
 
 @section('navBarMenu')
-    @include('navBarMenu')
+    @include('generalBlocks.navBarMenu')
 @stop
 
 @section('body')
-    @include('authBody')
+    @include('pageBlocks.authBody')
 @stop
 
 @section('sideBar')
-    @include('sideBar')
+    @include('generalBlocks.sideBar')
 @stop
 
 @section('footer')
-    @include('footer')
+    @include('generalBlocks.footer')
 @stop
