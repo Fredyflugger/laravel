@@ -18,8 +18,10 @@ $title = 'Моя первая страница';
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'NewsController@index')->name('news');
     Route::get('/create', 'NewsController@create')->name('news.create');
-    // Route::get('/{id}/edit', 'NewsController@edit')->where('id', '\d+')->name('news.edit');
-    Route::get('/{news}', 'NewsController@singleNews')->where('news', '\w+')->name('singleNews');
+    Route::get('/{news}', 'NewsController@singleNews')->name('singleNews');
+    Route::get('/{news}/edit', 'NewsController@NewsEdit')->name('news.edit');
+    Route::get('/{news}/delete', 'NewsController@NewsDelete')->name('news.delete');
+    Route::get('/{news}/edit/submit', 'NewsController@editSubmit')->name('news.editSubmit');
 
 });
 

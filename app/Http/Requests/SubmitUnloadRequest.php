@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubmitFormRequest extends FormRequest
+class SubmitUnloadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,8 @@ class SubmitFormRequest extends FormRequest
         return [
             'username' => ['required', 'string', 'min:3', 'max:50'],
             'email' => ['required', 'string', 'min:7', 'max:70'],
-            'message' =>['required', 'string', 'min:3', 'max:500']
+            'message' => ['required', 'string', 'min:3', 'max:500'],
+            'phone_number'=> ['required', 'string', 'min:3', 'max:30']
         ];
     }
 }

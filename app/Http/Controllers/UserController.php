@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\News;
+use App\Models\Category;
+use App\Models\UnloadRequest;
+use App\Models\Feedback;
+use App\Http\Requests\SubmitFormRequest;
+use App\Http\Requests\SubmitUnloadRequest;
 use App\Traits\newsDataTrait;
 
 class UserController extends Controller
@@ -11,36 +16,40 @@ class UserController extends Controller
     public function auth()
     {
         $title = 'Authentication';
-        return view('user.user', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
+        $category = Category::all();
+        return view('user.user', ['title' => $title, 'newsCategory' => $category]);
     }
     public function feedback()
     {
         $title = 'Feedback';
-        return view('user.feedback', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
+        $category = Category::all();
+        return view('user.feedback', ['title' => $title, 'newsCategory' => $category]);
     }
     public function unloadData()
     {
         $title = 'Unloading Request Form';
-        return view('user.unloadData', ['title' => $title, 'newsCategory' => $this->newsCategory()]);
+        $category = Category::all();
+        return view('user.unloadData', ['title' => $title, 'newsCategory' => $category]);
     }
-    public function unloadSubmit(Request $request)
+    public function unloadSubmit(SubmitUnloadRequest $request)
     {
-        $name = $request->input('unloadName');
-        $mail = $request->input('unloadMail');
-        $phone = $request->input('unloadPhone');
-        $text = $request->input('unloadText');
-        $str = "name:".$name. " - email:".$mail. " - phone:".$phone." - text:".$text.PHP_EOL;
-        file_put_contents(storage_path('app/public/unloadRequests.txt'), $str, FILE_APPEND);
-        return redirect()->route('news');
+        $unload = UnloadRequest::create($request->validated());
+
+        if ($unload) {
+            return redirect()->route('news');
+        }
+        
+        return back();
     }
-    public function feedbackSubmit(Request $request)
+    public function feedbackSubmit(SubmitFormRequest $request)
     {
-        $name = $request->input('subName');
-        $mail = $request->input('subMail');
-        $text = $request->input('subText');
-        $str = "name:".$name. " - email:".$mail." - text:".$text.PHP_EOL;
-        file_put_contents(storage_path('app/public/feedback.txt'), $str, FILE_APPEND);
-        return redirect()->route('news');
-        // Target class [App\Http\Controllers\SubmitFormRequest] does not exist.
+
+        $feedback = Feedback::create($request->validated());
+
+        if ($feedback) {
+            return redirect()->route('news');
+        }
+        
+        return back();
     }
 }
