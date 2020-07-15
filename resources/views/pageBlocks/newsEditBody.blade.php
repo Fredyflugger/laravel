@@ -1,5 +1,9 @@
 <div class="col-md-8 blog-main">
-<form action="{{ route('singleNews', [$newsData]) }}/edit/submit">
+<form action="{{ route('singleNews', [$newsData]) }}/edit/submit" method="POST">
+    
+    @csrf
+    @method('PUT')
+
     <label for="title">Login:</label><br>
     <input type="text" name="title" value="{{ $newsData->title }}" class="form-control input-lg"><br>
     <label for="text">Password:</label><br>

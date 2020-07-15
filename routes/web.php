@@ -17,12 +17,23 @@ $title = 'Моя первая страница';
 
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'NewsController@index')->name('news');
-    Route::get('/create', 'NewsController@create')->name('news.create');
+    Route::get('/create', 'NewsController@newsCreatePage')->name('news.createPage');
+    Route::post('/create/submit', 'NewsController@newsCreate')->name('news.create');
     Route::get('/{news}', 'NewsController@singleNews')->name('singleNews');
     Route::get('/{news}/edit', 'NewsController@NewsEdit')->name('news.edit');
     Route::get('/{news}/delete', 'NewsController@NewsDelete')->name('news.delete');
-    Route::get('/{news}/edit/submit', 'NewsController@editSubmit')->name('news.editSubmit');
+    Route::put('/{news}/edit/submit', 'NewsController@editSubmit')->name('news.editSubmit');
 
+});
+
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/', 'CategoryController@categories')->name('categories.show');
+    Route::get('/add/add', 'CategoryController@addCategory')->name('categories.add');
+    Route::put('/add/add/submit', 'CategoryController@addCatSubmit')->name('categories.addSubmit');
+    Route::get('/{cat}/edit', 'CategoryController@editCat')->name('categories.edit');
+    Route::put('/{cat}/edit/submit', 'CategoryController@editCatSubmit')->name('categories.editSubmit');
+    Route::get('/{cat}/delete', 'CategoryController@deleteCat')->name('categories.delete');
+    Route::get('/{cat}', 'CategoryController@singleCat')->name('singleCat');
 });
 
 Route::group(['prefix' => 'user'], function () {
@@ -33,8 +44,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/unload/submit', 'UserController@unloadSubmit')->name('unloadSubmit');
 });
 
+
 Route::get('/', 'NewsController@index')->name('greetings');
-Route::get('/{cat}', 'CategoryController@singleCat')->where('cat', '\w+')->name('singleCat');
+
 
 Auth::routes();
 

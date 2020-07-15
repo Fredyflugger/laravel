@@ -9,12 +9,11 @@ class Category extends Model
     protected $table = "categories";
     protected $primaryKey = "id";
     
-    protected $fillable = [
-        'title',
-        'slug',
-    ];
-
     public function newsCategory() {
         return \DB::select("SELECT categories, id FROM categories");
     }
+
+    protected $fillable = [
+        'categories',
+    ];
 }

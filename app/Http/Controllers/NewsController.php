@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Request;
 use App\Models\News;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\CreateNews;
+use App\Http\Requests\CreateNewsRequest;
 use App\Traits\newsDataTrait;
 
 class NewsController extends Controller
@@ -17,11 +19,20 @@ class NewsController extends Controller
         $news = News::orderBy('created_at', 'desc')->paginate(6);
         return view('news.greetings', ['title' => $title], ['newsCategory' => $category, 'newsData' => $news]);
     }
-    public function create()
+    public function newsCreatePage()
     {
         $title = 'News Creation';
         $category = Category::all();
         return view('news.create', ['title' => $title, 'newsCategory' => $category]);
+    }
+    public function newsCreate(CreateNewsRequest $request)
+    {
+        $create = CreateNews::create($request->validated());
+        if ($create) {
+            return redirect()->route('news');
+        }
+        
+        return back();
     }
     public function edit(int $id)
     {
@@ -42,12 +53,11 @@ class NewsController extends Controller
 
     public function newsDelete(News $news)
     {
-        $title = 'Deleting News...';
         $news->delete();
         return redirect('/');
     }
 
-    public function editSubmit(Request $request, News $news)
+    public function editSubmit(CreateNewsRequest $request, News $news)
     {
         $news->title = $request->input('title');
         $news->text = $request->input('text');
