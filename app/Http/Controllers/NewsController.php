@@ -6,6 +6,7 @@ use App\Http\Controllers\Request;
 use App\Models\News;
 use App\Models\Category;
 use App\Models\CreateNews;
+use App\Models\CategoryNews;
 use App\Http\Requests\CreateNewsRequest;
 use App\Traits\newsDataTrait;
 
@@ -27,8 +28,12 @@ class NewsController extends Controller
     }
     public function newsCreate(CreateNewsRequest $request)
     {
-        $create = CreateNews::create($request->validated());
-        if ($create) {
+        $create = CreateNews::create($request->only('title', 'text'));
+        foreach ($request->only('categories')['categories'] as $req) {
+            $createPivot = CategoryNews::create(["category_id" => $req, "news_id" => $create->id]);
+        }
+
+        if ($create && $createPivot) {
             return redirect()->route('news');
         }
         

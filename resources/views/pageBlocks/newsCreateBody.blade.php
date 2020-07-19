@@ -21,6 +21,21 @@
                     @endforeach
                 </div>
     @endif
+    <label for="categories[]">Choose categories:</label>
+    <select class="form-control" multiple name="categories[]">
+    @foreach($newsCategory as $category)
+        <option value="{{ $category->id }}">{{ $category->categories }}</option>
+    @endforeach
+    </select><br>
+    @if ($errors->has('categories[]'))
+                <div class="alert alert-danger">
+                    @foreach($errors->get('categories[]') as $error)
+                        <p style="margin-bottom: 0">{{ $error }}</p>
+                    @endforeach
+                </div>
+    @endif
+    <br>
+
     <!-- <label for="shortDesc">Short Description:</label><br>
     <input type="text" name="shortDesc" placeholder="Short description of your news"><br><br> -->
     <input type="submit" value="Submit" class="form-control btn-success">

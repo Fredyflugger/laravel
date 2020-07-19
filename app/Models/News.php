@@ -9,7 +9,8 @@ class News extends Model
     protected $table = "news";
     protected $primaryKey = "id";
 
-    public function newsData() {
-        return \DB::select("SELECT * FROM news");
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category');
     }
 }

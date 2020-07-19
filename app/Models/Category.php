@@ -9,8 +9,8 @@ class Category extends Model
     protected $table = "categories";
     protected $primaryKey = "id";
     
-    public function newsCategory() {
-        return \DB::select("SELECT categories, id FROM categories");
+    public function news() {
+        return $this->belongsToMany('App\Models\News');
     }
 
     protected $fillable = [

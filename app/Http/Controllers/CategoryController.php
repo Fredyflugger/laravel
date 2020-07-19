@@ -13,9 +13,8 @@ class CategoryController extends Controller
     public function singleCat(Category $cat)
     {
         $title = "Новостя";
-        $news = News::all();
         $categories = Category::all();
-        return view('news.singleCat', ['title' => $title, 'newsData' => $news, 'newsCategory' => $categories, 'category' => $cat]);
+        return view('news.singleCat', ['title' => $title, 'newsCategory' => $categories, 'category' => $cat]);
     }
 
     public function categories() 
