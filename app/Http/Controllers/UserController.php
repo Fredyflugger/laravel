@@ -13,12 +13,6 @@ use App\Traits\newsDataTrait;
 class UserController extends Controller
 {
     use newsDataTrait;
-    public function auth()
-    {
-        $title = 'Authentication';
-        $category = Category::all();
-        return view('user.user', ['title' => $title, 'newsCategory' => $category]);
-    }
     public function feedback()
     {
         $title = 'Feedback';

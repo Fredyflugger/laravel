@@ -37,13 +37,23 @@ Route::group(['prefix' => 'category'], function () {
 });
 
 Route::group(['prefix' => 'user'], function () {
-    Route::get('/auth', 'UserController@auth')->name('auth');
     Route::get('/feedback', 'UserController@feedback')->name('feedback');
     Route::post('/feedback/submit', 'UserController@feedbackSubmit')->name('feedbackSubmit');
     Route::get('/unload', 'UserController@unloadData')->name('unload');
     Route::post('/unload/submit', 'UserController@unloadSubmit')->name('unloadSubmit');
 });
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/logout', function() {
+        Auth::logout();
+        return redirect('/');
+    });
+    Route::group(['prefix' => 'admin'], function() {
+        Route::get('/', 'Admin\IndexController@index')->name('admin');
+        Route::resource('/categories', Admin\CategoryController::class);
+        Route::resource('/news', Admin\NewsController::class);
+    });
+}); 
 
 Route::get('/', 'NewsController@index')->name('greetings');
 
