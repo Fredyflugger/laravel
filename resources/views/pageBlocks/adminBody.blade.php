@@ -11,7 +11,7 @@
                 </small>
             </div>
             <a href="{{ route('users.edit', [$user]) }}"><p class="mb-1">Edit user</p></a>
-            <a href="#"><small>Delete user</small></a>
+            <a href="{{ route('users.delete', [$user]) }}"><small>Delete user</small></a>
         </div>
     </div>
 @endforeach

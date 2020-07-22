@@ -1,7 +1,5 @@
 <?php
 
-$text = 'Привет мир!';
-$title = 'Моя первая страница';
 // use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +14,11 @@ $title = 'Моя первая страница';
 */
 
 // Index
-Route::get('/', 'NewsController@index')->name('news');
+Route::get('/', 'HomePageController@index')->name('news');
 
 // Вывод отдельной новости
 Route::group(['prefix' => 'news'], function () {
-    // Route::get('/', 'NewsController@index')->name('news');
-    Route::get('/{news}', 'NewsController@singleNews')->name('singleNews');
+    Route::get('/{news}', 'HomePageController@singleNews')->name('singleNews');
 });
 
 // Вывод новостей по категории
@@ -55,7 +52,13 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('/users', Admin\AdminController::class);
         Route::get('categories/{cat}/delete', 'Admin\CategoryController@delete')->name('categories.delete');
         Route::get('/news/{news}/delete', 'Admin\NewsController@delete')->name('news.delete');
+        Route::get('/users/{user}/delete', 'Admin\AdminController@delete')->name('users.delete');
     });
+});
+
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/facebook/auth', 'SocialAuthController@fbAuth')->name('fb.auth');
+    Route::get('/facebook/auth/callback', 'SocialAuthController@fbAuthCallback')->name('fb.callback');
 });
 
 Auth::routes();

@@ -9,7 +9,7 @@ use App\Models\CreateNews;
 use App\Models\CategoryNews;
 use App\Http\Requests\CreateNewsRequest;
 
-class NewsController extends Controller
+class HomePageController extends Controller
 {
     public function index()
     {
