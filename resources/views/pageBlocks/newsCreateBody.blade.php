@@ -1,5 +1,5 @@
 <div class="col-md-8 blog-main">
-<form action="{{ route('news.create') }}" method="POST">
+<form action="{{ route('news.store') }}" method="POST">
 
     @csrf
 
@@ -35,9 +35,6 @@
                 </div>
     @endif
     <br>
-
-    <!-- <label for="shortDesc">Short Description:</label><br>
-    <input type="text" name="shortDesc" placeholder="Short description of your news"><br><br> -->
     <input type="submit" value="Submit" class="form-control btn-success">
 </form>
 </div>

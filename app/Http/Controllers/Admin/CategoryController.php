@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Category;
 use App\Http\Requests\EditCategoryRequest;
@@ -9,28 +11,36 @@ use App\Traits\newsDataTrait;
 
 class CategoryController extends Controller
 {
-    use newsDataTrait;
-    public function singleCat(Category $cat)
-    {
-        $title = "Новостя";
-        $categories = Category::all();
-        return view('news.singleCat', ['title' => $title, 'newsCategory' => $categories, 'category' => $cat]);
-    }
-
-    public function categories() 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $title="Категории новостей";
         $category = Category::all();
         return view('categories.categories', ['title' => $title, 'newsCategory' => $category]);
     }
 
-    public function addCategory() 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         $title = 'Category Creation';
         return view('categories.categoriesAdd', ['title' => $title]);
     }
 
-    public function addCatSubmit(EditCategoryRequest $request) 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(EditCategoryRequest $request)
     {
         $create = Category::create($request->validated());
         if ($create) {
@@ -40,23 +50,55 @@ class CategoryController extends Controller
         return back();
     }
 
-    public function editCat(Category $cat) 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $title = 'Category Edit';
-        return view('categories.categoriesEdit', ['title' => $title, 'newsCategory' => $cat]);
+        //
     }
 
-    public function editCatSubmit(EditCategoryRequest $request, Category $cat) 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-        $cat->categories = $request->input('categories');
-        if ($cat->save()){
+        $title = 'Category Edit';
+        $category = Category::find($id);
+        return view('categories.categoriesEdit', ['title' => $title, 'newsCategory' => $category]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(EditCategoryRequest $request, $id)
+    {
+        $category = Category::find($id);
+        $category->categories = $request->input('categories');
+        if ($category->save()){
            return redirect('/');
         }
 
         return back();
     }
 
-    public function deleteCat(Category $cat) 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Category $cat)
     {
         $cat->delete();
         return redirect('/');

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Request;
 use App\Models\News;
 use App\Models\Category;
@@ -12,21 +13,35 @@ use App\Traits\newsDataTrait;
 
 class NewsController extends Controller
 {
-    use newsDataTrait;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $title = 'My News';
-        $category = Category::all();
-        $news = News::orderBy('created_at', 'desc')->paginate(6);
-        return view('news.greetings', ['title' => $title], ['newsCategory' => $category, 'newsData' => $news]);
+        //
     }
-    public function newsCreatePage()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         $title = 'News Creation';
         $category = Category::all();
         return view('news.create', ['title' => $title, 'newsCategory' => $category]);
     }
-    public function newsCreate(CreateNewsRequest $request)
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateNewsRequest $request)
     {
         $create = CreateNews::create($request->only('title', 'text'));
         foreach ($request->only('categories')['categories'] as $req) {
@@ -39,30 +54,39 @@ class NewsController extends Controller
         
         return back();
     }
-    public function edit(int $id)
-    {
-        return view('news.edit', ['id' => $id]);
-    }
-    public function singleNews(News $news)
-    {
-        $title = 'Новостя';
-        return view('news.singleNews', ['title' => $title], ['newsData' => $news]);
-    }
 
-    public function newsEdit(News $news)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function show($id)
+    // {
+    //     //
+    // }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(News $news)
     {
         $title = 'News Edit';
         $category = Category::all();
-        return view('news.newsEdit', ['title' => $title], ['newsData' => $news, 'newsCategory' => $category]);
+        return view('news.newsEdit', ['title' => $title, 'newsData' => $news, 'newsCategory' => $category]);
     }
 
-    public function newsDelete(News $news)
-    {
-        $news->delete();
-        return redirect('/');
-    }
-
-    public function editSubmit(CreateNewsRequest $request, News $news)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CreateNewsRequest $request, News $news)
     {
         $news->title = $request->input('title');
         $news->text = $request->input('text');
@@ -70,6 +94,18 @@ class NewsController extends Controller
            return redirect('/');
         }
 
-        return back();
+        return redirect('/');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(News $news)
+    {
+        $news->delete();
+        return redirect('/');
     }
 }

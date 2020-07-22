@@ -1,9 +1,11 @@
 <div class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-        <form action="{{ route('categories.editSubmit', [$newsCategory]) }}" method="POST">
+        <form action="{{ route('categories.update', [$newsCategory->id]) }}" method="POST">
+
             @csrf
             @method('PUT')
+            
             <label for="categories"> Название категории:</label><br>
             <input type="text" name="categories" value="{{ $newsCategory->categories }}" class="form-control"> <br>
             @if ($errors->has('categories'))

@@ -3,7 +3,7 @@
     <div class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-center">
-                <a href="{{ route('categories.add') }}"><h5 class="mb-1">Create New Category</h5></a>
+                <a href="{{ route('categories.create') }}"><h5 class="mb-1">Create New Category</h5></a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
                     @endif
                 </small>
             </div>
-            <a href="{{ route('singleCat', [$category]) }}/edit"><p class="mb-1">Rename Category</p></a>
+            <a href="{{ route('categories.edit', [$category]) }}"><p class="mb-1">Rename Category</p></a>
             <a href="{{ route('categories.delete', [$category]) }}"><small>Delete Category</small></a>
         </div>
     </div>

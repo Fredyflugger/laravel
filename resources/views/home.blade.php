@@ -19,6 +19,17 @@
                     @endif
 
                     You are logged in!
+
+                    @if(Auth::user()->is_admin)
+                        <br>
+                        <a href="{{ route('admin') }}" class="text-danger">Перейти в админку</a>
+                    @endif
+
+                    @if(session()->has('error'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

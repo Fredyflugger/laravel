@@ -15,27 +15,21 @@ $title = 'Моя первая страница';
 |
 */
 
-Route::group(['prefix' => 'news'], function () {
-    Route::get('/', 'NewsController@index')->name('news');
-    Route::get('/create', 'NewsController@newsCreatePage')->name('news.createPage');
-    Route::post('/create/submit', 'NewsController@newsCreate')->name('news.create');
-    Route::get('/{news}', 'NewsController@singleNews')->name('singleNews');
-    Route::get('/{news}/edit', 'NewsController@NewsEdit')->name('news.edit');
-    Route::get('/{news}/delete', 'NewsController@NewsDelete')->name('news.delete');
-    Route::put('/{news}/edit/submit', 'NewsController@editSubmit')->name('news.editSubmit');
+// Index
+Route::get('/', 'NewsController@index')->name('news');
 
+// Вывод отдельной новости
+Route::group(['prefix' => 'news'], function () {
+    // Route::get('/', 'NewsController@index')->name('news');
+    Route::get('/{news}', 'NewsController@singleNews')->name('singleNews');
 });
 
+// Вывод новостей по категории
 Route::group(['prefix' => 'category'], function () {
-    Route::get('/', 'CategoryController@categories')->name('categories.show');
-    Route::get('/add/add', 'CategoryController@addCategory')->name('categories.add');
-    Route::put('/add/add/submit', 'CategoryController@addCatSubmit')->name('categories.addSubmit');
-    Route::get('/{cat}/edit', 'CategoryController@editCat')->name('categories.edit');
-    Route::put('/{cat}/edit/submit', 'CategoryController@editCatSubmit')->name('categories.editSubmit');
-    Route::get('/{cat}/delete', 'CategoryController@deleteCat')->name('categories.delete');
     Route::get('/{cat}', 'CategoryController@singleCat')->name('singleCat');
 });
 
+// Фидбэк и анлоад
 Route::group(['prefix' => 'user'], function () {
     Route::get('/feedback', 'UserController@feedback')->name('feedback');
     Route::post('/feedback/submit', 'UserController@feedbackSubmit')->name('feedbackSubmit');
@@ -43,21 +37,25 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/unload/submit', 'UserController@unloadSubmit')->name('unloadSubmit');
 });
 
+// Авторизация и админка
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', function() {
         Auth::logout();
         return redirect('/');
-    });
-    Route::group(['prefix' => 'admin'], function() {
+    }); 
+
+    // Account home page
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    // Admin
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         Route::get('/', 'Admin\IndexController@index')->name('admin');
         Route::resource('/categories', Admin\CategoryController::class);
         Route::resource('/news', Admin\NewsController::class);
+        Route::resource('/users', Admin\AdminController::class);
+        Route::get('categories/{cat}/delete', 'Admin\CategoryController@delete')->name('categories.delete');
+        Route::get('/news/{news}/delete', 'Admin\NewsController@delete')->name('news.delete');
     });
-}); 
-
-Route::get('/', 'NewsController@index')->name('greetings');
-
+});
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
