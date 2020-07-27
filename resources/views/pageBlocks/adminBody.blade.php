@@ -1,5 +1,6 @@
 <a class="p-2 text-danger" href="{{ route('categories.index') }}">Все категории</a> <br>
 <a class="p-2 text-danger" href="{{ route('news.create') }}">Создать новость</a> <br>
+<a class="p-2 text-danger" href="{{ route('parser') }}">Парсер</a> <br>
 
 @foreach ($users as $user)
     <div class="list-group-item list-group-item-action flex-column align-items-start">

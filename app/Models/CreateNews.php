@@ -12,6 +12,8 @@ class CreateNews extends Model
 
     protected $fillable = [
         'title',
-        'text',
+        'description',
+        'link',
+        'created_at',
     ];
 }

@@ -10,6 +10,7 @@ use App\Models\CreateNews;
 use App\Models\CategoryNews;
 use App\Http\Requests\CreateNewsRequest;
 use App\Traits\newsDataTrait;
+use App\Events\NewsEditedEvent;
 
 class NewsController extends Controller
 {
@@ -44,11 +45,15 @@ class NewsController extends Controller
     public function store(CreateNewsRequest $request)
     {
         $create = CreateNews::create($request->only('title', 'text'));
-        foreach ($request->only('categories')['categories'] as $req) {
-            $createPivot = CategoryNews::create(["category_id" => $req, "news_id" => $create->id]);
+        
+        if (isset($request->only('categories')['categories'])) {
+            foreach ($request->only('categories')['categories'] as $req) {
+                $createPivot = CategoryNews::create(["category_id" => $req, "news_id" => $create->id]);
+            }
         }
 
-        if ($create && $createPivot) {
+
+        if ($create) {
             return redirect()->route('news');
         }
         
@@ -91,7 +96,8 @@ class NewsController extends Controller
         $news->title = $request->input('title');
         $news->text = $request->input('text');
         if ($news->save()){
-           return redirect('/');
+            event(new NewsEditedEvent($news));
+            return redirect('/');
         }
 
         return redirect('/');

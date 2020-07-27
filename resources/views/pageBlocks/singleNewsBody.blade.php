@@ -11,6 +11,6 @@
     <a href="{{ route('singleCat', [$category->id]) }}"> {{ $category->categories }} </a>
     @endforeach
     <p>
-    {{ $newsData->text }}
+    {{ $newsData->description }}
     </p>
 </div><!-- /.blog-post -->

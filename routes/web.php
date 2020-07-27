@@ -50,9 +50,13 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('/categories', Admin\CategoryController::class);
         Route::resource('/news', Admin\NewsController::class);
         Route::resource('/users', Admin\AdminController::class);
+        // Удаление категорий, новостей, пользователей.
         Route::get('categories/{cat}/delete', 'Admin\CategoryController@delete')->name('categories.delete');
         Route::get('/news/{news}/delete', 'Admin\NewsController@delete')->name('news.delete');
         Route::get('/users/{user}/delete', 'Admin\AdminController@delete')->name('users.delete');
+        // Парсер
+        Route::get('/parser', 'ParserController@index')->name('parser');
+        Route::get('/parser/save', 'ParserController@save')->name('parser.save');
     });
 });
 

@@ -13,11 +13,11 @@
                     @endforeach
                 </div> <br>
     @endif 
-    <label for="text">Text:</label><br>
-    <input type="text" name="text" value="{{ $newsData->text }}" class="form-control input-lg"><br><br>
-    @if ($errors->has('text'))
+    <label for="description">Text:</label><br>
+    <input type="text" name="description" value="{{ $newsData->description }}" class="form-control input-lg"><br><br>
+    @if ($errors->has('description'))
                 <div class="alert alert-danger">
-                    @foreach($errors->get('text') as $error)
+                    @foreach($errors->get('description') as $error)
                         <p style="margin-bottom: 0">{{ $error }}</p>
                     @endforeach
                 </div> <br>

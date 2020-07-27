@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
             $table->text('text')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
-            $table->enum('status', ['new', 'published', 'blocked'])->default('new');
+            $table->enum('status', ['new', 'edited', 'blocked'])->default('new');
         });
     }
 

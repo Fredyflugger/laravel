@@ -12,11 +12,11 @@
                     @endforeach
                 </div>
     @endif
-    <label for="text">News:</label><br>
-    <textarea name="text" cols="30" rows="10" class="form-control"></textarea><br>
-    @if ($errors->has('text'))
+    <label for="description">News:</label><br>
+    <textarea name="description" cols="30" rows="10" class="form-control"></textarea><br>
+    @if ($errors->has('description'))
                 <div class="alert alert-danger">
-                    @foreach($errors->get('text') as $error)
+                    @foreach($errors->get('description') as $error)
                         <p style="margin-bottom: 0">{{ $error }}</p>
                     @endforeach
                 </div>
