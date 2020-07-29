@@ -8,6 +8,10 @@
     @include('generalBlocks.navBarMenu')
 @stop
 
+@section('navBarParsers')
+    @include('generalBlocks.navBarParsers')
+@stop
+
 @section('body')
     @include('pageBlocks.adminBody')
 @stop

@@ -6,9 +6,9 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class XmlParserService
 {
-    public function parse(): array
+    public function parse($link): array
     {
-        $xml = XmlParser::load('https://news.yandex.ru/Moscow/index.rss');
+        $xml = XmlParser::load($link);
         $parse = $xml->parse([
             'news' => [
                 'uses' => 'channel.item[title,description,link,pubDate]'

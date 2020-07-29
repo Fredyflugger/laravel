@@ -9,11 +9,7 @@
 @stop
 
 @section('body')
-@include('pageBlocks.ParserBody')
-@stop
-
-@section('sideBar')
-@include('generalBlocks.sideBar')
+@include('pageBlocks.parserEditBody')
 @stop
 
 @section('footer')

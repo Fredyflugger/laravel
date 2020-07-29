@@ -25,7 +25,7 @@
                 </a>
                 <p class="blog-post-meta">{{ $value['pubDate'] }}</p>
                 <p>
-                    {{ $value['description'] }}
+                    {!! $value['description'] !!}
                 </p>
             </div><!-- /.blog-post -->
             @endforeach

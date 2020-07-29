@@ -26,6 +26,7 @@
   <div class="container">
     @yield('header')
     @yield('navBarMenu')
+    @yield('navBarParsers')
     @yield('banner')
     <div class="row mb-2">
     </div>
