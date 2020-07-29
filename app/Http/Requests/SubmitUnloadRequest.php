@@ -27,7 +27,7 @@ class SubmitUnloadRequest extends FormRequest
             'username' => ['required', 'string', 'min:3', 'max:50'],
             'email' => ['required', 'string', 'min:7', 'max:70'],
             'message' => ['required', 'string', 'min:3', 'max:500'],
-            'phone_number'=> ['required', 'string', 'min:3', 'max:30']
+            'phone_number' => ['required', 'string', 'min:3', 'max:30']
         ];
     }
 }

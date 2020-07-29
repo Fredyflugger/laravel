@@ -18,7 +18,7 @@ class SourcesSeeder extends Seeder
     {
         $objFaker = Faker\Factory::create('ru_RU');
         $data = [];
-        for ($i=0; $i<10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $data[] = [
                 'sourceUrl' => $objFaker->domainName
             ];

@@ -10,9 +10,12 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class SaveParsedDataService
 {
-    public function save($data) {
-        foreach ($data as $value) {
-            $create = CreateNews::create($value);    
+    public function save($data)
+    {
+        if (isset($data)) {
+            foreach ($data as $value) {
+                $create = CreateNews::create($value);
+            }
         }
     }
 }

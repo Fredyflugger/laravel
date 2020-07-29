@@ -18,7 +18,7 @@ class CategoriesSeeder extends Seeder
     {
         $objFaker = Faker\Factory::create('ru_RU');
         $data = [];
-        for ($i=0; $i<5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $data[] = [
                 'categories' => $objFaker->word
             ];

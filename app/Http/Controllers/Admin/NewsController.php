@@ -21,7 +21,6 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -44,8 +43,8 @@ class NewsController extends Controller
      */
     public function store(CreateNewsRequest $request)
     {
-        $create = CreateNews::create($request->only('title', 'text'));
-        
+        $create = CreateNews::create($request->only('title', 'description'));
+
         if (isset($request->only('categories')['categories'])) {
             foreach ($request->only('categories')['categories'] as $req) {
                 $createPivot = CategoryNews::create(["category_id" => $req, "news_id" => $create->id]);
@@ -56,7 +55,7 @@ class NewsController extends Controller
         if ($create) {
             return redirect()->route('news');
         }
-        
+
         return back();
     }
 
@@ -95,7 +94,7 @@ class NewsController extends Controller
     {
         $news->title = $request->input('title');
         $news->text = $request->input('text');
-        if ($news->save()){
+        if ($news->save()) {
             event(new NewsEditedEvent($news));
             return redirect('/');
         }

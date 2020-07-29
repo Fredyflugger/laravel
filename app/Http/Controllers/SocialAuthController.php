@@ -7,11 +7,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthController extends Controller
 {
-    public function fbAuth () {
+    public function fbAuth()
+    {
         return Socialite::with('facebook')->redirect();
     }
 
-    public function fbAuthCallback () {
+    public function fbAuthCallback()
+    {
         $user = Socialite::driver('facebook')->user();
         dd($user);
     }

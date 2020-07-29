@@ -1,13 +1,13 @@
 @extends('layouts.layout')
 
 @section('header')
-    @include('header')
+@include('header')
 @stop
 
 @section('body')
-    @include('indexBody')
+@include('indexBody')
 @stop
 
 @section('footer')
-    @include('footer')
+@include('footer')
 @stop

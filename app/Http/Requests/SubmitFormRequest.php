@@ -26,7 +26,7 @@ class SubmitFormRequest extends FormRequest
         return [
             'username' => ['required', 'string', 'min:3', 'max:50'],
             'email' => ['required', 'string', 'min:7', 'max:70'],
-            'message' =>['required', 'string', 'min:3', 'max:500']
+            'message' => ['required', 'string', 'min:3', 'max:500']
         ];
     }
 }

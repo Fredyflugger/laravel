@@ -32,7 +32,7 @@ class UserController extends Controller
         if ($unload) {
             return redirect()->route('news');
         }
-        
+
         return back();
     }
     public function feedbackSubmit(SubmitFormRequest $request)
@@ -43,7 +43,7 @@ class UserController extends Controller
         if ($feedback) {
             return redirect()->route('news');
         }
-        
+
         return back();
     }
 }

@@ -35,17 +35,17 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 // Авторизация и админка
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/logout', function() {
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', function () {
         Auth::logout();
         return redirect('/');
-    }); 
+    });
 
     // Account home page
     Route::get('/home', 'HomeController@index')->name('home');
 
     // Admin
-    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/', 'Admin\IndexController@index')->name('admin');
         Route::resource('/categories', Admin\CategoryController::class);
         Route::resource('/news', Admin\NewsController::class);
@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
 });
 
-Route::group(['middleware' => 'guest'], function() {
+Route::group(['middleware' => 'guest'], function () {
     Route::get('/facebook/auth', 'SocialAuthController@fbAuth')->name('fb.auth');
     Route::get('/facebook/auth/callback', 'SocialAuthController@fbAuthCallback')->name('fb.callback');
 });

@@ -26,7 +26,7 @@ class NewsEditedListener
      */
     public function handle($event)
     {
-        if(isset($event->news)) {
+        if (isset($event->news)) {
             $news = $event->news;
             $news->status = 'edited';
             $news->save();

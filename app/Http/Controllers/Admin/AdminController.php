@@ -79,8 +79,8 @@ class AdminController extends Controller
         } else {
             $user->is_admin = 0;
         }
-        if ($user->save()){
-           return redirect('admin');
+        if ($user->save()) {
+            return redirect('admin');
         }
 
         return redirect('back');

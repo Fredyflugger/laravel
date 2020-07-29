@@ -8,8 +8,9 @@ class Category extends Model
 {
     protected $table = "categories";
     protected $primaryKey = "id";
-    
-    public function news() {
+
+    public function news()
+    {
         return $this->belongsToMany('App\Models\News');
     }
 

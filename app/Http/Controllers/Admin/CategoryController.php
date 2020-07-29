@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $title="Категории новостей";
+        $title = "Категории новостей";
         $category = Category::all();
         return view('categories.categories', ['title' => $title, 'newsCategory' => $category]);
     }
@@ -46,7 +46,7 @@ class CategoryController extends Controller
         if ($create) {
             return redirect()->route('news');
         }
-        
+
         return back();
     }
 
@@ -85,8 +85,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->categories = $request->input('categories');
-        if ($category->save()){
-           return redirect('/');
+        if ($category->save()) {
+            return redirect('/');
         }
 
         return back();
