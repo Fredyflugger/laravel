@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/rss/{parser}/delete', 'Admin\ParsersController@delete')->name('parsers.delete');
         // Парсер
         Route::get('/parser/{parser}', 'ParserController@index')->name('parser');
-        Route::get('/parser/save', 'ParserController@save')->name('parser.save');
+        Route::get('/parser/save/{url}', 'ParserController@save')->name('parser.save');
         Route::get('/parser/veiw', 'ParserController@view')->name('parser.view');
     });
 });

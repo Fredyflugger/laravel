@@ -13,15 +13,15 @@ class ParserController extends Controller
         $parsers = Parsers::all();
         $title = 'Parser';
         $parse = new XmlParserService();
-        return view('admin.parser', ['title' => $title, 'news' => $parse->parse($parser->source_url), 'parsers' => $parsers]);
+        return view('admin.parser', ['title' => $title, 'news' => $parse->parse($parser->source_url), 'parsers' => $parsers, 'parserId' => $parser->id]);
     }
 
-    public function save()
+    public function save($id)
     {
-        $link = 'https://news.yandex.ru/Moscow/index.rss';
+        $url = Parsers::find($id)->source_url;
         $parse = new XmlParserService();
         $save = new SaveParsedDataService();
-        $save->save($parse->parse($link));
+        $save->save($parse->parse($url));
         return redirect()->back()->with('success', 'News added to DB');
     }
 }

@@ -1,7 +1,7 @@
 <div class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-center">
-            <a href="{{ route('parser.save') }}">
+            <a href="{{ route('parser.save', $parserId) }}">
                 <h5 class="mb-1">Save Parsed news to DB</h5>
             </a>
         </div>
